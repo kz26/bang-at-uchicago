@@ -17,7 +17,7 @@ The frontend is written in mostly-compliant HTML5 and CSS3, and uses [AngularJS]
 
 ## Want to Bang, but not at UChicago?
 
-If you're interested in banging at your school/institution/college/university/workplace we highly encourage you to fork the BaUC repo and modify it as appropriate. The UChicago-specific LDAP code resides in app/main/users.py will have to be customized for your specific environment, of course.
+If you're interested in banging at your school/institution/college/university/workplace we highly encourage you to fork the BaUC repo and modify it as appropriate. The UChicago-specific LDAP query code residing in `app/main/users.py` will have to be customized for your specific environment, of course.
 
 
 
