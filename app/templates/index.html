@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Bang at UChicago</title>
+        <meta name="description" content="Find out who's down to bang with you at UChicago.">
+        <meta name="viewport" content="width=device-width">
+
+		<meta property="og:image" content="http://bangatuchicago.com{{ STATIC_URL }}icon.png">
+		<meta property="og:title" content="Bang at UChicago">
+		<meta property="og:url" content="http://bangatuchicago.com">
+		<meta property="og:site_name" content="Bang at UChicago">
+		<meta property="og:type" content="website">
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
+		<link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+
+		<link rel="icon" type="image/png" href="{{ STATIC_URL }}icon.png">
+		<link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}apple-touch-icon-precomposed.png">
+
+		<link rel="author" href="{{ STATIC_URL }}humans.txt">
+
+        <!--[if lt IE 9]>
+            <script src="{{ STATIC_URL }}js/vendor/html5-3.6-respond-1.1.0.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+		{% csrf_token %}
+
+		{% verbatim %}
+        <div class="container" ng-app="app">
+			<div class="row" ng-controller="NullCtrl">
+				<div class="span12">
+					<div class="well maroon-bg" style="border: none;">
+						<h1 class="center" style="font-family: 'EB Garamond', serif;"><a href="#/">Bang at UChicago</a></h1>
+						<div style="width: 450px; margin: 0 auto;">
+							<div class="fb-like" data-href="http://bangatuchicago.com" data-send="false" data-show-faces="true" data-width="450" data-font="arial" data-colorscheme="dark"></div>
+						</div>
+						<div class="center" ng-show="user">
+							<p>Welcome, {{ user.first_name }} {{ user.last_name }}<br>
+							<span ng-show="user.inner_circle">
+								<a href="#/most/bangable">(Most Bangable)</a>
+								<br>
+							</span>
+							<a href="#/who/i/want/to/bang">(My Bangs)</a>
+							<a href="#/my/fucking/account">(My Account)</a>
+							<a href="#/stop/banging">(Logout)</a>
+							</p>
+						</div>
+					</div>
+					<div class="alert alert-info">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						Don't forget to check out our sister site <a href="http://2studentbodies.com/uchicago/" target="_blank">2studentbodies</a> for all of your dating needs!
+					</div>
+					<div class="alert alert-info">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						Don't want to Bang at UChicago? Then <a href="http://bangatanywhereelse.com" target=_"blank">Bang at Anywhere Else</a>
+						or just <a href="http://bangwithfriends.com" target="_blank">Bang with Friends</a>!
+					</div>
+				</div>
+			</div>
+
+			<div class="row" ng-controller="NavCtrl" ng-show="showNav">
+				<div class="offset3 span6">
+					<div class="well">
+						<ul class="nav nav-tabs">
+							<li ng-repeat="page in pages" ng-class="activeCSS(page.url)">
+								<a href="{{ page.url }}">{{ page.name }}</a>
+							</li>
+						</ul>	
+					</div>
+				</div>
+			</div>
+
+			<ng-view></ng-view>
+		{% endverbatim %}
+
+            <footer>
+				<div class="well center maroon-bg" style="border: none;">
+					<p>&copy; <a href="#/">Bang at UChicago</a> 2013. This site is not affiliated with the University of Chicago.
+					<br>
+					<a href="#/privacy">Privacy Policy</a>
+					<br>
+					<a href="{{ STATIC_URL }}terms.html" target="_blank">Terms and Conditions of Use</a>
+					<br>
+					<a href="https://en.wikipedia.org/wiki/File:Snell_Hitchcock1.JPG" target="_blank">Snell-Hitchcock</a>, 
+					&copy; 2008, used under a <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">
+					Creative Commons Attribution-ShareAlike 3.0 license</a>.
+					<br>
+					<a href="{{ STATIC_URL }}humans.txt" target="_blank"><img src="{{ STATIC_URL }}humanstxt-isolated-blank.gif"></a>
+					</p>
+					<p>Email us: <b>bang (at) bangatuchicago.com</b></p>
+				</div>
+            </footer>
+
+        </div> <!-- /container -->
+
+		<script> 
+			var $buoop = {vs:{i:8,f:3.6,o:10.6,s:4,n:9}}; 
+			$buoop.ol = window.onload; 
+			window.onload=function(){ 
+			 try {if ($buoop.ol) $buoop.ol();}catch (e) {} 
+			 var e = document.createElement("script"); 
+			 e.setAttribute("type", "text/javascript"); 
+			 e.setAttribute("src", "http://browser-update.org/update.js"); 
+			 document.body.appendChild(e); 
+			} 
+		</script> 
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-2.0.0.min.js"><\/script>')</script>
+
+        <script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+        <script src="{{ STATIC_URL }}js/services.js"></script>
+        <script src="{{ STATIC_URL }}js/directives.js"></script>
+        <script src="{{ STATIC_URL }}js/controllers.js"></script>
+
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+			fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-10371252-11', 'bangatuchicago.com');
+			ga('send', 'pageview');
+		</script>
+    </body>
+</html>

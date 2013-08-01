@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="offset2 span8">
+		<div class="well">
+			<h2>My Bang Matches</h2>
+			<p ng-show="myBangMatches.length">Congratulations, the following people want to bang you too! Consider dropping them a line...</p>
+			<p ng-show="myBangMatches.length">New matches created in the last 24 hours are shown in <span class="text-success">green</span>.</p>
+			<p ng-show="!myBangMatches.length">Oh noes, it looks like no one wants to bang you back. Forever alone :(</p>
+			<table class="table" ng-show="myBangMatches.length">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Date matched</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="bang in myBangMatches" ng-class="getReadCSS(bang.read)">
+						<td>{{ bang.first_name }} {{ bang.last_name }}</td>
+						<td>{{ bang.cnetid }}@uchicago.edu</td>
+						<td>{{ bang.date | date:'longDate' }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="offset3 span6">
+		<div class="well">
+			<h1>Start banging!</h1>
+			<form class="form-horizontal" name="form" novalidate>
+				<div class="alert alert-error" ng-show="errors">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					Invalid username and/or password.
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="inputCnetid">Username (CNetID)</label>
+					<div class="controls">
+						<input type="text" id="inputCnetid" name="username" ng-model="user.username" required>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="inputPassword1">Password</label>
+					<div class="controls">
+						<input type="password" id="inputPassword1" ng-model="user.password" required>
+					</div>
+				</div>
+
+				<button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid">Let's bang!</button>
+			</form>
+		</div>
+	</div>
+</div>

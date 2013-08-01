@@ -1,0 +1,58 @@
+body {
+	background: url(/static/img/background.jpg) no-repeat center center fixed;
+	background-size: cover;
+}
+
+input.ng-invalid.ng-dirty {
+	background-color: #FA787E;
+}
+
+.center {
+	text-align: center;
+}
+
+.spaced {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.maroon {
+	color: #800000;
+}
+
+.maroon-bg {
+	background-color: #800000;
+	color: white;
+}
+
+.maroon-bg a {
+	color: white;
+}
+
+.white {
+	color: white;
+}
+
+.bang-table td:not(:first-child) {
+	padding-top: 14px;
+}
+
+.circle-number {
+	border-radius: 999px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 40pt;
+	padding: 40pt;
+	margin: 0.5em;
+	border: 1px solid (227, 227, 227);
+	display: inline-block;
+	background-color: rgb(245,245,245);
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset;
+}
+
+.well-op70 {
+	background-color: rgba(245, 245, 245, 0.7);
+}
+
+.well-op85 {
+	background-color: rgba(245, 245, 245, 0.85);
+}

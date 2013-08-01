@@ -1,0 +1,38 @@
+# humanstxt.org/
+# The humans responsible & technology involved
+
+# TEAM
+
+	Wouldn't you like to know?
+
+# THANKS
+
+	Various UChicago students: testing, UI/UX feedback
+
+# SITE AND TECHNOLOGY
+
+	Language: English
+	Last update: 05/17/2013
+	Standards: HTML5, CSS3
+	Frontend components:
+		* Initializr
+		* Bootstrap
+		* jQuery
+		* AngularJS
+		* Respond.js
+		* Google Web Fonts
+		* Google Analytics
+		* Facebook JavaScript SDK 
+	Backend components:
+		* Django
+		* Django REST Framework
+		* python-ldap
+		* Celery / django-celery
+		* RabbitMQ
+		* Memcached
+	Tools:
+		* Ubuntu Linux
+		* Python
+		* CoffeeScript
+		* Adobe Photoshop
+		* vim

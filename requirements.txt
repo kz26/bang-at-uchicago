@@ -1,0 +1,4 @@
+Django==1.5.1
+django-celery==3.0.17
+djangorestframework==2.3.2
+south

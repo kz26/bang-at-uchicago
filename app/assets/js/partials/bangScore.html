@@ -1,0 +1,16 @@
+<div class="row">
+	<div class="offset2 span8">
+		<div class="well">
+			<h2>My Bangability Score</h2>
+			<h1 class="center">{{ scoreData.score }}</h1>
+			<p>This means
+				<ng-pluralize count="scoreData.score" when="{0: 'nobody wants', 1: 'one person wants', other: '{} people want'}"></ng-pluralize>
+				to bang you!
+				<span ng-show="scoreData.score == 0">Forever alone :(</span>
+				<span ng-show="scoreData.score > 0">But we won't tell you who ;)</span>
+			</p>
+			<p>Your score makes you the <b>#{{ scoreData.rank }}</b> most bangable person!</p>
+			<p>The Bangability Score is calculated as: (# of outstanding bangs) + (# of bang matches)</p>
+		</div>
+	</div>
+</div>

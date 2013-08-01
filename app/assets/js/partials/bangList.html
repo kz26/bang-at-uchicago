@@ -1,0 +1,56 @@
+<div class="row">
+	<div class="offset2 span8">
+		<div class="well">
+			<h2>Find someone to bang!</h2>
+			<form name="form" novalidate>
+				<p class="text-info">Enter CNetID <b>or</b> first <b>and</b> last name.</p>
+				<p class="text-error" ng-show="searchQueryError">An error occurred. Please try again later.</p>
+				<p ng-show="showFap" style="font-size: 24pt;"><a href="http://en.wikipedia.org/wiki/Masturbation" target="_blank">http://en.wikipedia.org/wiki/Masturbation</a></p>
+				<label></label>
+				<input type="text" id="bsCnetId" name="cnetid" ng-model="searchQuery.cnetid" placeholder="CNetID">
+				or
+				<label></label>
+				<input type="text" id="bsFirst" name="first_name" ng-model="searchQuery.first_name" placeholder="First name">
+				and
+				<input type="text" id="bsLast" name="last_name" ng-model="searchQuery.last_name" placeholder="Last name">
+
+				<br>
+				<button class="btn btn-primary" name="submit" ng-click="search()" ng-disabled="!isFormValid()">{{ submitText }}</button>
+			</form>
+
+			<div ng-show="searchResults != null">
+				<p>People found: {{ searchResults.length }}</p>
+				<p ng-show="searchResults.length == 0">Check your spelling and make sure you're using the person's full name.</p>
+				<div ng-repeat="bang in searchResults" class="spaced">
+					<button class="btn btn-success" ng-click="addBang(bang)" data-toggle="tooltip" title="Click to add this user to your Bang List" tooltip><i class="icon-user"></i> Bang!</button>
+					{{ bang.first_name }} {{ bang.last_name }} ({{ bang.cnetid }})
+				</div>
+			</div>
+		</div>	
+
+		<div class="well">
+			<h2>My Bang List</h2>
+			<p ng-show="myBangs.length">We'll send you and your bang-ee an email <b>if and only if</b> you both indicate that you want to bang each other!</p>
+			<table class="table bang-table" ng-show="myBangs.length">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>Name</th>
+						<th>CNetID</th>
+						<th>Date added</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="bang in myBangs">
+						<td><button class="btn btn-danger" ng-click="unBang(bang)" data-toggle="tooltip" title="Click to remove this user from your Bang List" tooltip><i class="icon-fire"></i> Unbang :(</button></td>
+						<td>{{ bang.first_name }} {{ bang.last_name }}</td>
+						<td>{{ bang.cnetid }}</td>
+						<td>{{ bang.date | date:'longDate' }}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p ng-show="!myBangs.length">Aww, banging with just one hand tonight? Starting searching for bangs with your other hand, pronto!</p>
+		</div>
+	</div>
+</div>

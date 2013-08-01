@@ -1,0 +1,39 @@
+<div class="row">
+	<div class="offset2 span8">
+		<div class="well">
+			<h1>Register to Bang!</h1>
+			<form class="form-horizontal" name="form" novalidate>
+				<div class="control-group">
+					<label class="control-label" for="inputCnetid">CNetID</label>
+					<div class="controls">
+						<input type="text" id="inputCnetid" name="username" ng-model="user.username" ng-change="resetError('username', 'invalidCnetId')" required>
+						<span class="text-error" ng-show="form.username.$error.invalidCnetId"><br>{{ errors.username[0] }}</span>
+						<p>CNetID is used for verification and anti-spam purposes only. If you have opted out of the UChicago campus directory, you will be unable to register.</p>
+						<p ng-show="user.username">We'll bang out a confirmation email to {{ user.username }}@uchicago.edu.</p>
+					</div>
+				</div>
+
+
+				<div class="control-group">
+					<label class="control-label" for="inputPassword1">Choose a password</label>
+					<div class="controls">
+						<input type="password" id="inputPassword1" name="password" ng-model="user.password" ng-change="resetError('password', 'invalid')" required>
+						<span ng-show="form.password.$dirty && form.password.$invalid" class="text-error"><br>{{ errors.password[0] }}</span>
+						<p>NOTE: This is separate from your CNetID password and is used only for
+							Bang at UChicago. In fact, we recommend choosing a new, different password for Bang at UChicago.</p>
+					</div>
+				</div>
+
+
+				<div class="control-group">
+					<label class="control-label" for="inputPassword2">Confirm password</label>
+					<div class="controls">
+						<input type="password" id="inputPassword2" data-validate-with="{{user.password}}" ng-model="user.passwordConfirm" required validate-password>
+					</div>
+				</div>
+
+				<button class="btn btn-primary" ng-click="submit()" ng-disabled="form.$invalid">Let's bang!</button>
+			</form>
+		</div>
+	</div>
+</div>

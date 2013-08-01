@@ -1,0 +1,51 @@
+<div class="row">
+	<div class="offset2 span8">
+		<div class="well">
+			<h1>My Banging Account!</h1>
+
+			<form class="form-horizontal" name="profileForm" novalidate>
+				<p ng-show="profileUpdated" class="text-success">Profile updated successfully!</p>
+				<p ng-show="profileUpdateError" class="text-error">An error occurred while trying to update your profile. Please try again later.</p>
+				<label class="radio">
+					<input type="radio" name="optout" ng-model="profile.optout" value="1">
+					Refractory period ON - you will not be notified of any BangMatches
+				</label>
+				<label class="radio">
+					<input type="radio" name="optout" ng-model="profile.optout" value="0">
+					Refractory period OFF (default) - you will be notified of any BangMatches
+				</label>
+
+			<button class="btn btn-primary" ng-click="updateProfile()">Update!</button>
+			</form>
+
+			<form class="form-horizontal" name="pwChangeForm" novalidate>
+				<h2>Change your password</h2>
+				<p ng-show="pwChanged" class="text-success">Password changed successfully!</p>
+				<div class="control-group">
+					<label class="control-label" for="inputPassword1">Enter original password</label>
+					<div class="controls">
+						<input type="password" id="inputPassword1" name="old_password" ng-model="passData.old_password" ng-change="resetError('pwChangeForm', 'old_password', 'invalid')" required>
+						<span ng-show="pwChangeForm.old_password.$dirty && pwChangeForm.old_password.$invalid" class="text-error"><br>{{ pwChangeErrors.old_password[0] }}</span>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="inputPassword1">Choose a new password</label>
+					<div class="controls">
+						<input type="password" id="inputPassword1" name="password" ng-model="passData.password" ng-change="resetError('pwChangeForm', 'password', 'invalid')" required>
+						<span ng-show="pwChangeForm.password.$dirty && pwChangeForm.password.$invalid" class="text-error"><br>{{ pwChangeErrors.password[0] }}</span>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="inputPassword2">Confirm new password</label>
+					<div class="controls">
+						<input type="password" id="inputPassword2" data-validate-with="{{passData.password}}" ng-model="passData.passwordConfirm" required validate-password>
+					</div>
+				</div>
+
+				<button class="btn btn-primary" ng-click="changePassword()" ng-disabled="pwChangeForm.$invalid">Change my fucking password!</button>
+			</form>
+		</div>
+	</div>
+</div>

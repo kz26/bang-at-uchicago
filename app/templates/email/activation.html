@@ -1,0 +1,12 @@
+<html>
+<p>Hello {{ user.first_name }} {{ user.last_name }},</p>
+
+<p>You're almost ready to Bang at UChicago! We just need you to verify your account
+by banging the link below:</p>
+
+<p>
+<a href="{{ protocol }}://{{ site.domain }}{{ link }}">{{ protocol }}://{{ site.domain }}{{ link }}</a>
+</p>
+
+<p>If you did not register an account, please disregard the above - we're sorry to have bothered you!</p> 
+</html>
