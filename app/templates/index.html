@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load compress %}<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -49,9 +49,9 @@
 						<div style="width: 450px; margin: 0 auto;">
 							<div class="fb-like" data-href="http://bangatuchicago.com" data-send="false" data-show-faces="true" data-width="450" data-font="arial" data-colorscheme="dark"></div>
 						</div>
-						<div class="center" ng-show="user">
+						<div class="center" ng-show="user" ng-cloak>
 							<p>Welcome, {{ user.first_name }} {{ user.last_name }}<br>
-							<span ng-show="user.inner_circle">
+							<span ng-show="show_hidden_pages">
 								<a href="#/most/bangable">(Most Bangable)</a>
 								<br>
 							</span>
@@ -63,17 +63,15 @@
 					</div>
 					<div class="alert alert-info">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						Don't forget to check out our sister site <a href="http://2studentbodies.com/uchicago/" target="_blank">2studentbodies</a> for all of your dating needs!
-					</div>
-					<div class="alert alert-info">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						Don't want to Bang at UChicago? Then <a href="http://bangatanywhereelse.com" target=_"blank">Bang at Anywhere Else</a>
-						or just <a href="http://bangwithfriends.com" target="_blank">Bang with Friends</a>!
+						<p>Don't forget to check out our sister site <a href="http://2studentbodies.com/uchicago/" target="_blank">2studentbodies</a>
+							for all of your dating needs!</p>
+						<p>Don't want to Bang at UChicago? Then <a href="http://bangatanywhereelse.com" target="_blank">Bang at Anywhere Else</a>
+						or just <a href="http://bangwithfriends.com" target="_blank">Bang with Friends</a>!</p>
 					</div>
 				</div>
 			</div>
 
-			<div class="row" ng-controller="NavCtrl" ng-show="showNav">
+			<div class="row" ng-controller="NavCtrl" ng-show="showNav" ng-cloak>
 				<div class="offset3 span6">
 					<div class="well">
 						<ul class="nav nav-tabs">
@@ -85,12 +83,12 @@
 				</div>
 			</div>
 
-			<ng-view></ng-view>
+			<ng-view ng-cloak></ng-view>
 		{% endverbatim %}
 
             <footer>
 				<div class="well center maroon-bg" style="border: none;">
-					<p>&copy; <a href="#/">Bang at UChicago</a> 2013. This site is not affiliated with the University of Chicago.
+					<p>&copy; <a href="#/">Bang at UChicago</a> 2013. This site is not affiliated with Bang with Friends or the University of Chicago.
 					<br>
 					<a href="#/privacy">Privacy Policy</a>
 					<br>
@@ -102,7 +100,9 @@
 					<br>
 					<a href="{{ STATIC_URL }}humans.txt" target="_blank"><img src="{{ STATIC_URL }}humanstxt-isolated-blank.gif"></a>
 					</p>
-					<p>Email us: <b>bang (at) bangatuchicago.com</b></p>
+					<p>Email us: <b>bang (at) bangatuchicago.com</b>
+					<br><a href="https://github.com/BangAtUChicago/bang-at-uchicago" target="_blank">Fork us on Github</a>
+					</p>
 				</div>
             </footer>
 
@@ -127,9 +127,12 @@
         <script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
-        <script src="{{ STATIC_URL }}js/services.js"></script>
-        <script src="{{ STATIC_URL }}js/directives.js"></script>
-        <script src="{{ STATIC_URL }}js/controllers.js"></script>
+
+        {% compress js %}
+        <script type="text/coffeescript" charset="utf-8" src="{{ STATIC_URL }}js/services.coffee"></script>
+        <script type="text/coffeescript" charset="utf-8" src="{{ STATIC_URL }}js/directives.coffee"></script>
+        <script type="text/coffeescript" charset="utf-8" src="{{ STATIC_URL }}js/controllers.coffee"></script>
+        {% endcompress %}
 
 		<div id="fb-root"></div>
 		<script>(function(d, s, id) {

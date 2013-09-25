@@ -121,8 +121,6 @@ class BangList(generics.ListAPIView):
 	
 	def get_queryset(self):
 		results = Bang.objects.select_related().filter(banger=self.request.user)
-		#for bang in results:
-		#	tasks.setup_match.delay(self.request.user.id, bang.bangee.id)
 		return results
 
 class BangSearch(views.APIView):
@@ -186,11 +184,14 @@ class DeleteBang(views.APIView):
 				bang = Bang.objects.get(id=serializer.data['id'], banger=request.user)
 			except Bang.DoesNotExist:
 				return response.Response({'id': ['Invalid bang ID']}, status=status.HTTP_404_NOT_FOUND)
-			bang.delete()
-			bangee = bang.bangee
-			bangee.profile.bang_score -= 1
-			bangee.profile.save()
-			return response.Response(None, status=status.HTTP_204_NO_CONTENT)
+			if bang.can_unbang:
+				bang.delete()
+				bangee = bang.bangee
+				bangee.profile.bang_score -= 1
+				bangee.profile.save()
+				return response.Response(None, status=status.HTTP_204_NO_CONTENT)
+			else:
+				return response.Response({'id': ['Cannot unbang at this time.']}, status=status.HTTP_403_FORBIDDEN)
 		return response.response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class MostBangable(generics.ListAPIView):
@@ -201,6 +202,6 @@ class MostBangable(generics.ListAPIView):
 		return Bang.objects.most_bangable_users()
 
 	def get(self, request, *args, **kwargs):
-		if request.user.is_staff or request.user.groups.filter(name='Inner Circle').exists():
+		if request.user.is_staff or request.user.groups.filter(name='inner_circle').exists():
 			return super(MostBangable, self).get(request, *args, **kwargs)
 		return response.Response(None, status=status.HTTP_403_FORBIDDEN)

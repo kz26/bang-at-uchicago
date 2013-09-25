@@ -20,9 +20,11 @@ app.directive 'validatePassword', ->
 					return undefined
 	}
 
-app.directive 'tooltip', ->
+app.directive 'tooltip', ($parse) ->
 	return {
 		link: (scope, elem, attrs) ->
+			if 'caption' of attrs
+				attrs.$set 'title', $parse(attrs.caption)(scope)
 			elem.tooltip()
 	}
 

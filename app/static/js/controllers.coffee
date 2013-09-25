@@ -59,9 +59,8 @@ LoginCtrl = ($rootScope, $scope, $http, $location) ->
 			.success (data) ->
 				$scope.errors = null
 				$rootScope.user = data
-				if (1 in data.groups)
-					$rootScope.inner_circle = true
-				$location.path "/bang"
+				$rootScope.show_hidden_pages = ('inner_circle' in data.groups)
+				$location.path "/who/i/want/to/bang"
 			.error (data) ->
 				$scope.errors = data
 
@@ -193,12 +192,19 @@ BangCtrl = ($rootScope, $scope, $http, $location) ->
 				$scope.searchResults.splice($scope.searchResults.indexOf(user), 1)
 	
 	$scope.unBang = (bang) ->
-		$http.post("/bangs/delete/", {id: bang.id})
-			.success ->
-				$scope.myBangs.splice($scope.myBangs.indexOf(bang), 1)
-			.error (data, status) ->
-				if status == 404
+		if bang.can_unbang
+			$http.post("/bangs/delete/", {id: bang.id})
+				.success ->
 					$scope.myBangs.splice($scope.myBangs.indexOf(bang), 1)
+				.error (data, status) ->
+					if status == 404
+						$scope.myBangs.splice($scope.myBangs.indexOf(bang), 1)
+
+	$scope.getTooltip = (bang) ->
+		if bang.can_unbang
+			return "Don't want to bang this person anymore? Click to remove them from your Bang List."
+		else
+			return "You can't pull out yet, you're not done! Wait 24 hours to remove this user from your Bang List."
 
 	$http.get("/my/bangs/")
 		.success (data) ->
@@ -232,7 +238,7 @@ BangScoreCtrl = ($rootScope, $scope, $http, $location) ->
 			$scope.scoreData = data
 
 MostBangableCtrl = ($rootScope, $scope, $http, $location) ->
-	if not $rootScope.user or not (1 in $rootScope.user.groups)
+	if not $rootScope.user or not ($rootScope.show_hidden_pages)
 		$location.path "/"
 		$location.replace()
 		return

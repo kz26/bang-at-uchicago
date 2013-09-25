@@ -12,9 +12,12 @@ class UserSerializer(serializers.ModelSerializer):
 		model = User
 		fields = ('id', 'cnetid', 'first_name', 'last_name', 'groups')
 	cnetid = serializers.SerializerMethodField('get_cnetid')
+	groups = serializers.SerializerMethodField('get_groups')
 
 	def get_cnetid(self, obj):
 		return obj.profile.cnetid
+	def get_groups(self, obj):
+		return list(obj.groups.all().values_list('name', flat=True))
 
 class UserWithBangScoreSerializer(UserSerializer):
 	class Meta:
@@ -91,10 +94,11 @@ class ProfileSerializer(serializers.ModelSerializer):
 class BangSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Bang
-		fields = ('id', 'first_name', 'last_name', 'cnetid', 'date')
+		fields = ('id', 'first_name', 'last_name', 'cnetid', 'date', 'can_unbang')
 	first_name = serializers.SerializerMethodField('get_first_name')
 	last_name = serializers.SerializerMethodField('get_last_name')
 	cnetid = serializers.SerializerMethodField('get_cnetid')
+	can_unbang = serializers.SerializerMethodField('get_can_unbang')
 
 	def get_first_name(self, obj):
 		return obj.bangee.first_name
@@ -104,6 +108,9 @@ class BangSerializer(serializers.ModelSerializer):
 	
 	def get_cnetid(self, obj):
 		return obj.bangee.profile.cnetid
+
+	def get_can_unbang(self, obj):
+		return obj.can_unbang
 
 
 class BangMatchSerializer(BangSerializer):

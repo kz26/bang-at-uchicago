@@ -20,8 +20,8 @@ app = angular.module('app', [])
 		$http.get("/auth-info/")
 			.success (data) ->
 				$rootScope.user = data
-				if (1 in data.groups)
-					$rootScope.user.inner_circle = true
-				$location.path "/who/i/want/to/bang"
+				if data
+					$location.path "/who/i/want/to/bang"
+					$rootScope.show_hidden_pages = ('inner_circle' in data.groups)
 			.error ->
         		$rootScope.user = null

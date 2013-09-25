@@ -12,7 +12,7 @@
 # SITE AND TECHNOLOGY
 
 	Language: English
-	Last update: 05/17/2013
+	Last update: September 5, 2013
 	Standards: HTML5, CSS3
 	Frontend components:
 		* Initializr
@@ -36,3 +36,4 @@
 		* CoffeeScript
 		* Adobe Photoshop
 		* vim
+		* Sublime Text 2

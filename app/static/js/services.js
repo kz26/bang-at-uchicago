@@ -49,10 +49,10 @@ app = angular.module('app', []).config(function($routeProvider) {
 }).run(function($rootScope, $http, $location) {
   return $http.get("/auth-info/").success(function(data) {
     $rootScope.user = data;
-    if ((__indexOf.call(data.groups, 1) >= 0)) {
-      $rootScope.user.inner_circle = true;
+    if (data) {
+      $location.path("/who/i/want/to/bang");
+      return $rootScope.show_hidden_pages = (__indexOf.call(data.groups, 'inner_circle') >= 0);
     }
-    return $location.path("/who/i/want/to/bang");
   }).error(function() {
     return $rootScope.user = null;
   });

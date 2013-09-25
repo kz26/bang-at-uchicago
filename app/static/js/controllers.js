@@ -85,10 +85,8 @@ LoginCtrl = function($rootScope, $scope, $http, $location) {
     return $http.post("/login/", $scope.user).success(function(data) {
       $scope.errors = null;
       $rootScope.user = data;
-      if ((__indexOf.call(data.groups, 1) >= 0)) {
-        $rootScope.inner_circle = true;
-      }
-      return $location.path("/bang");
+      $rootScope.show_hidden_pages = (__indexOf.call(data.groups, 'inner_circle') >= 0);
+      return $location.path("/who/i/want/to/bang");
     }).error(function(data) {
       return $scope.errors = data;
     });
@@ -255,15 +253,24 @@ BangCtrl = function($rootScope, $scope, $http, $location) {
     });
   };
   $scope.unBang = function(bang) {
-    return $http.post("/bangs/delete/", {
-      id: bang.id
-    }).success(function() {
-      return $scope.myBangs.splice($scope.myBangs.indexOf(bang), 1);
-    }).error(function(data, status) {
-      if (status === 404) {
+    if (bang.can_unbang) {
+      return $http.post("/bangs/delete/", {
+        id: bang.id
+      }).success(function() {
         return $scope.myBangs.splice($scope.myBangs.indexOf(bang), 1);
-      }
-    });
+      }).error(function(data, status) {
+        if (status === 404) {
+          return $scope.myBangs.splice($scope.myBangs.indexOf(bang), 1);
+        }
+      });
+    }
+  };
+  $scope.getTooltip = function(bang) {
+    if (bang.can_unbang) {
+      return "Don't want to bang this person anymore? Click to remove them from your Bang List.";
+    } else {
+      return "You can't pull out yet, you're not done! Wait 24 hours to remove this user from your Bang List.";
+    }
   };
   return $http.get("/my/bangs/").success(function(data) {
     return $scope.myBangs = data;
@@ -301,7 +308,7 @@ BangScoreCtrl = function($rootScope, $scope, $http, $location) {
 };
 
 MostBangableCtrl = function($rootScope, $scope, $http, $location) {
-  if (!$rootScope.user || !(__indexOf.call($rootScope.user.groups, 1) >= 0)) {
+  if (!$rootScope.user || !$rootScope.show_hidden_pages) {
     $location.path("/");
     $location.replace();
     return;

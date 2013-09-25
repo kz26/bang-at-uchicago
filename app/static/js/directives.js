@@ -29,9 +29,12 @@ app.directive('validatePassword', function() {
   };
 });
 
-app.directive('tooltip', function() {
+app.directive('tooltip', function($parse) {
   return {
     link: function(scope, elem, attrs) {
+      if ('caption' in attrs) {
+        attrs.$set('title', $parse(attrs.caption)(scope));
+      }
       return elem.tooltip();
     }
   };

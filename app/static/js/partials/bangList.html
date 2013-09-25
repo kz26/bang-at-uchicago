@@ -31,6 +31,7 @@
 		<div class="well">
 			<h2>My Bang List</h2>
 			<p ng-show="myBangs.length">We'll send you and your bang-ee an email <b>if and only if</b> you both indicate that you want to bang each other!</p>
+			<p class="text-warning">You will need to wait <b>24 hours</b> after banging a person before being able to pull out (remove them from your list).</p>
 			<table class="table bang-table" ng-show="myBangs.length">
 				<thead>
 					<tr>
@@ -42,7 +43,7 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="bang in myBangs">
-						<td><button class="btn btn-danger" ng-click="unBang(bang)" data-toggle="tooltip" title="Click to remove this user from your Bang List" tooltip><i class="icon-fire"></i> Unbang :(</button></td>
+						<td><button class="btn btn-danger" ng-click="unBang(bang)" ng-class="{disabled: !bang.can_unbang}" data-toggle="tooltip" data-caption="getTooltip(bang)" tooltip><i class="icon-fire"></i> Pull out!</button></td>
 						<td>{{ bang.first_name }} {{ bang.last_name }}</td>
 						<td>{{ bang.cnetid }}</td>
 						<td>{{ bang.date | date:'longDate' }}</td>

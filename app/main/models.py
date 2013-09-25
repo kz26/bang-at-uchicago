@@ -1,6 +1,10 @@
 from django.db import models
 from django.dispatch import receiver
 from django.contrib.auth.models import User
+from django.utils import timezone
+from django.conf import settings
+
+from datetime import timedelta
 
 from app.main.random_str import *
 
@@ -69,6 +73,12 @@ class Bang(models.Model):
 
 	def __unicode__(self):
 		return "<%s, %s>" % (self.banger.get_full_name(), self.bangee.get_full_name())
+
+	@property
+	def can_unbang(self):
+		if settings.DEBUG:
+			return True
+		return self.date + timedelta(days=1) < timezone.now()
 
 	objects = BangManager()
 
